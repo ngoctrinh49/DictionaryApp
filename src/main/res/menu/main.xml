@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
-        android:icon="@drawable/english_vietnam"
+        android:icon="@drawable/english_vietnamese"
         android:orderInCategory="100"
         android:title=""
         app:showAsAction="always" >
