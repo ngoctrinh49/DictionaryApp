@@ -3,14 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_200">
+    android:background="@color/design_default_color_background" >
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="25dp"
-        android:text="Bookmark"
-        android:gravity="center"/>
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Sau khi an Bookmark"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/myBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nhan thuong"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
 
 </FrameLayout>
