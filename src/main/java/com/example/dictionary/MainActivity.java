@@ -3,6 +3,7 @@ package com.example.dictionary;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -43,15 +44,17 @@ public class MainActivity extends AppCompatActivity
         goToFragment(dictionaryFragment, true);
         dictionaryFragment.setOnFragmentListener(new FragmentListener() {
             @Override
-            public void onItemClick() {
-                goToFragment(new DetialFragment(), false);
+            public void onItemClick(String message) {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                goToFragment(DetialFragment.getNewInstance(message), false);
             }
         });
 
         bookmarkFragment.setOnFragmentListener(new FragmentListener() {
             @Override
-            public void onItemClick() {
-                goToFragment(new DetialFragment(), false);
+            public void onItemClick(String message) {
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                goToFragment(DetialFragment.getNewInstance(message), false);
             }
         });
     }

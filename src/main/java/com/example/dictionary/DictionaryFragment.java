@@ -15,8 +15,9 @@ public class DictionaryFragment extends Fragment {
 
     private FragmentListener fragmentListener;
 
+    private String message = "Ban vua an vao Dictionary Fragment";
+
     public DictionaryFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -34,7 +35,7 @@ public class DictionaryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (fragmentListener != null) {
-                    fragmentListener.onItemClick();
+                    fragmentListener.onItemClick(message);
                 }
             }
         });
