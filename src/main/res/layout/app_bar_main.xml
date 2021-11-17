@@ -29,7 +29,7 @@
                 android:paddingLeft="5dp"
                 android:textColor="#000000"
                 android:textSize="20dp"
-                android:hint="Tra từ"
+                android:hint="@string/search_word"
                 android:textColorHint="#9a9a9a"/>
         </androidx.appcompat.widget.Toolbar>
 

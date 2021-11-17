@@ -7,32 +7,32 @@
         <item
             android:id="@+id/nav_bookmark"
             android:icon="@drawable/ic_bookmark"
-            android:title="Bookmark"/>
+            android:title="@string/bookmark"/>
     </group>
 
-    <item android:title="Network">
+    <item android:title="@string/network">
         <menu>
             <item
                 android:id="@+id/nav_rate"
                 android:icon="@drawable/ic_thumb_up"
-                android:title="Rate" />
+                android:title="@string/rate" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/share" />
         </menu>
     </item>
 
-    <item android:title="Other">
+    <item android:title="@string/other">
         <menu>
             <item
                 android:id="@+id/nav_help"
                 android:icon="@drawable/ic_help"
-                android:title="Help" />
+                android:title="@string/help" />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"
-                android:title="About" />
+                android:title="@string/about" />
         </menu>
     </item>
 </menu>
