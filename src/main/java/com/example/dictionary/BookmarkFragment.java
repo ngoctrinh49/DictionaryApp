@@ -59,12 +59,22 @@ public class BookmarkFragment extends Fragment {
             }
         });
 
+        adapter.setOnItemDeleteClick(new ListItemListener() {
+            @Override
+            public void onItemClick(int position) {
+                adapter.removeItem(position);
+                adapter.notifyDataSetChanged();
+            }
+        });
+
         //khi an vao delete thi hien thi xoa
         adapter.setOnItemDeleteClick(new ListItemListener() {
             @Override
             public void onItemClick(int position) {
-                String message = String.valueOf(adapter.getItem(position));
-                Toast.makeText(getContext(), message + " đã được xoá khỏi bọokmark!", Toast.LENGTH_SHORT).show();
+//                String message = String.valueOf(adapter.getItem(position));
+//                Toast.makeText(getContext(), message + " đã được xoá khỏi bọokmark!", Toast.LENGTH_SHORT).show();
+                adapter.removeItem(position);
+                adapter.notifyDataSetChanged();
             }
         });
     }

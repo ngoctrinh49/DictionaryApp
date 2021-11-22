@@ -15,6 +15,10 @@ public class DictionaryFragment extends Fragment {
 
     private FragmentListener fragmentListener;
 
+    private ArrayAdapter<String> adapter;
+
+    protected ListView words;
+
     private String message = "Ban vua an vao Dictionary Fragment";
 
     public DictionaryFragment() {
@@ -32,8 +36,8 @@ public class DictionaryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ListView words = view.findViewById(R.id.dictionaryList);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getListOfWords());
+        words = view.findViewById(R.id.dictionaryList);
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getListOfWords());
         words.setAdapter(adapter);
         words.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -43,6 +47,21 @@ public class DictionaryFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void resetDataSource(String[] source) {
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, source);
+        words.setAdapter(adapter);
+    }
+
+    public void filterValue(String value) {
+        int size = adapter.getCount();
+        for (int i = 0; i < size; i++) {
+            if (adapter.getItem(i).startsWith(value)) {
+                words.setSelection(i);
+                break;
+            }
+        }
     }
 
     public String[] getListOfWords() {

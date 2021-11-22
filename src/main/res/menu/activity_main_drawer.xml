@@ -15,7 +15,7 @@
             <item
                 android:id="@+id/nav_rate"
                 android:icon="@drawable/ic_thumb_up"
-                android:title="@string/rate" />
+                android:title="@string/rate"/>
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
@@ -28,7 +28,7 @@
             <item
                 android:id="@+id/nav_help"
                 android:icon="@drawable/ic_help"
-                android:title="@string/help" />
+                android:title="@string/help"  />
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info"

@@ -1,8 +1,11 @@
 package com.example.dictionary;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -57,6 +60,24 @@ public class MainActivity extends AppCompatActivity
                 goToFragment(DetialFragment.getNewInstance(message), false);
             }
         });
+        EditText edit_search_var = findViewById(R.id.edit_search);
+        edit_search_var.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                dictionaryFragment.filterValue(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
     }
 
     public void onBackPressed() {
@@ -75,8 +96,15 @@ public class MainActivity extends AppCompatActivity
         menuSetting = menu.findItem(R.id.action_settings);
 
         String id = Global.getState(this, "dic_type");
+
         if (id != null) {
-            //onOptionsItemSelected(menu.findItem(Integer.valueOf(id)));
+            //onOptionsItemSelected(menu.findItem(Integer.valueOf(id)));              //BUG(menu.findItem(212221)-> null
+
+            //THAY  THE BANG
+            onOptionsItemSelected(menu.findItem(R.id.action_settings));
+        } else {
+            //DB.getData(R.id.action_eng_viet);
+            dictionaryFragment.resetDataSource(DB.getData(R.id.action_eng_viet));
         }
 
         return true;
@@ -87,14 +115,20 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         // xu ly action bar item clicks here. The action bar will automatcaly handle clicks on the
         // Home/Up button, so long as you specify a parent activity in AndroidManifest.xml
-//        int id = item.getItemId();
-//        Global.saveState(this, "dic_type", String.valueOf(id));
-//
-//        if (id == R.id.action_eng_viet) {
-//            menuSetting.setIcon(getDrawable(R.drawable.english_vietnamese));
-//        } else if (id == R.id.action_viet_eng) {
-//            menuSetting.setIcon(getDrawable(R.drawable.vietnamese_english));
-//        }
+        int id = item.getItemId();
+
+        //System.out.println("Hello i am bug " + id);
+
+        Global.saveState(this, "dic_type", String.valueOf(id));
+        String[] source = DB.getData(id);
+
+        if (id == R.id.action_eng_viet) {
+            dictionaryFragment.resetDataSource(source);
+            menuSetting.setIcon(getDrawable(R.drawable.english_vietnamese));
+        } else if (id == R.id.action_viet_eng) {
+            dictionaryFragment.resetDataSource(source);
+            menuSetting.setIcon(getDrawable(R.drawable.vietnamese_english));
+        }
 
         return super.onOptionsItemSelected(item);
     }
