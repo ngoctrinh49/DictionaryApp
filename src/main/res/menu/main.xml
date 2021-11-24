@@ -10,12 +10,12 @@
         <menu>
             <item
                 android:id="@+id/action_eng_viet"
-                android:title="English - Vietnamese"
+                android:title="@string/english_vietnamese"
                 android:orderInCategory="100"
                 app:showAsAction="never"/>
             <item
                 android:id="@+id/action_viet_eng"
-                android:title="Vietnamese - English"
+                android:title="@string/vietnamese_english"
                 android:orderInCategory="100"
                 app:showAsAction="never"/>
         </menu>

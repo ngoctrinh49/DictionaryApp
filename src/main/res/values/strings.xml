@@ -20,4 +20,6 @@
     <string name="other">Other</string>
     <string name="help">Help</string>
     <string name="about">About</string>
+    <string name="english_vietnamese">English - Vietnamese</string>
+    <string name="vietnamese_english">Vietnamese - English</string>
 </resources>
