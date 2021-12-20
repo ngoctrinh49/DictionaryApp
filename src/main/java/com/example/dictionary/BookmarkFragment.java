@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -36,15 +38,8 @@ public class BookmarkFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        Button myButton = (Button) view.findViewById(R.id.myBtn);
-//        myButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (fragmentListener != null) {
-//                    fragmentListener.onItemClick(message);
-//                }
-//            }
-//        });
+        setHasOptionsMenu(true);
+
         ListView bookmarkList = (ListView) view.findViewById(R.id.bookmarkList);
         BookmarkAdapter adapter = new BookmarkAdapter(getActivity(), getListOfWords());
         bookmarkList.setAdapter(adapter);
@@ -89,9 +84,16 @@ public class BookmarkFragment extends Fragment {
 
     public String[] getListOfWords() {
         String[] words = new String[] {
-                "a",
-                "b",
-                "c"
+                "vertical",
+                "encode",
+                "parse",
+                "relative",
+                "craw",
+                "necessary",
+                "reminded",
+                "balance",
+                "language",
+                "loaf",
         };
         return words;
     }
@@ -110,5 +112,11 @@ public class BookmarkFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_bookmark, container, false);
+    }
+
+    //clear button
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_clear, menu);
     }
 }

@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -18,10 +19,16 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
     implements NavigationView.OnNavigationItemSelectedListener{
 
     MenuItem menuSetting;
+    Toolbar toolbar;
+
+    DBHelper dbHelper;
 
     DictionaryFragment dictionaryFragment;
     BookmarkFragment bookmarkFragment;
@@ -30,8 +37,14 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        try {
+            dbHelper = new DBHelper(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -48,16 +61,22 @@ public class MainActivity extends AppCompatActivity
         dictionaryFragment.setOnFragmentListener(new FragmentListener() {
             @Override
             public void onItemClick(String message) {
+                String id = Global.getState(MainActivity.this, "dic_type");
+                int dicType = id == null ? R.id.action_eng_viet : Integer.valueOf(id);
+
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                goToFragment(DetialFragment.getNewInstance(message), false);
+                goToFragment(DetailFragment.getNewInstance(message, dbHelper, dicType), false);
             }
         });
 
         bookmarkFragment.setOnFragmentListener(new FragmentListener() {
             @Override
             public void onItemClick(String message) {
+                String id = Global.getState(MainActivity.this, "dic_type");
+                int dicType = id == null ? R.id.action_eng_viet : Integer.valueOf(id);
+
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                goToFragment(DetialFragment.getNewInstance(message), false);
+                goToFragment(DetailFragment.getNewInstance(message, dbHelper, dicType), false);
             }
         });
         EditText edit_search_var = findViewById(R.id.edit_search);
@@ -99,28 +118,33 @@ public class MainActivity extends AppCompatActivity
 
         if (id != null) {
             //onOptionsItemSelected(menu.findItem(Integer.valueOf(id)));              //BUG(menu.findItem(212221)-> null
-
             //THAY  THE BANG
             onOptionsItemSelected(menu.findItem(R.id.action_settings));
         } else {
             //DB.getData(R.id.action_eng_viet);
-            dictionaryFragment.resetDataSource(DB.getData(R.id.action_eng_viet));
+            ArrayList<String> source = dbHelper.getWord(R.id.action_eng_viet);
+
+            System.out.println("-------------------\n" + source + "\n---------------------\n");
+
+            dictionaryFragment.resetDataSource(source);
         }
 
         return true;
     }
 
-    //dùng khi đã có dữ liệu
+    //khi click vào icon
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // xu ly action bar item clicks here. The action bar will automatcaly handle clicks on the
         // Home/Up button, so long as you specify a parent activity in AndroidManifest.xml
         int id = item.getItemId();
-
         //System.out.println("Hello i am bug " + id);
+        if (R.id.action_settings == id) {
+            return true;
+        }
 
         Global.saveState(this, "dic_type", String.valueOf(id));
-        String[] source = DB.getData(id);
+        ArrayList<String> source = dbHelper.getWord(id);
 
         if (id == R.id.action_eng_viet) {
             dictionaryFragment.resetDataSource(source);
@@ -141,7 +165,11 @@ public class MainActivity extends AppCompatActivity
 
         //neu an vao nut bookmark
         if (id == R.id.nav_bookmark) {
-            goToFragment(bookmarkFragment,false);
+            String activeFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container).getClass().getSimpleName();
+            //one click to out bookmark
+            if (!activeFragment.equals(BookmarkFragment.class.getSimpleName())) {
+                goToFragment(bookmarkFragment,false);
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -158,5 +186,24 @@ public class MainActivity extends AppCompatActivity
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit();
+    }
+
+    // must has setHasOptionsMenu in BookmarkFragment.java
+    //ham hien thi book mark rieng
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        //fragment_container app_bar_main.xml
+        String activeFragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container).getClass().getSimpleName();
+        if (activeFragment.equals(BookmarkFragment.class.getSimpleName())) {
+            menuSetting.setVisible(false);  //khong hien thi icon
+            toolbar.findViewById(R.id.edit_search).setVisibility(View.GONE);
+            toolbar.setTitle("Bookmark");
+        }
+        else {
+            menuSetting.setVisible(true);   //hien thi icon
+            toolbar.findViewById(R.id.edit_search).setVisibility(View.VISIBLE);
+            toolbar.setTitle("");
+        }
+        return true;
     }
 }

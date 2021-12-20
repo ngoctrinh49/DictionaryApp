@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/nav_bookmark"
-            android:icon="@drawable/ic_bookmark"
+            android:icon="@drawable/ic_bookmark_fill"
             android:title="@string/bookmark"/>
     </group>
 

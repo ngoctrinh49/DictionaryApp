@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+
 public class DictionaryFragment extends Fragment {
 
     private FragmentListener fragmentListener;
@@ -20,6 +22,10 @@ public class DictionaryFragment extends Fragment {
     protected ListView words;
 
     private String message = "Ban vua an vao Dictionary Fragment";
+
+    private ArrayList<String> mSource = new ArrayList<String>();
+
+    private DBHelper dbHelper;
 
     public DictionaryFragment() {
     }
@@ -31,26 +37,35 @@ public class DictionaryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_dictionary, container, false);
     }
 
-    //ham xu ly listview
+//    public void getData() {
+//        mSource = dbHelper.getWordFromAV();
+//    }
+
+    //ham xu ly listview (khoi tao chu khi bat app)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //test thử
+        //getData();
+
         words = view.findViewById(R.id.dictionaryList);
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, getListOfWords());
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, mSource);
         words.setAdapter(adapter);
         words.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (fragmentListener != null) {
-                    fragmentListener.onItemClick(getListOfWords()[position]);       //hien message ten tu vua click
+                    fragmentListener.onItemClick(mSource.get(position));       //hien message ten tu vua click
                 }
             }
         });
     }
 
-    public void resetDataSource(String[] source) {
-        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, source);
+    //2. thêm từ mới vào textview
+    public void resetDataSource(ArrayList<String> new_words) {
+        mSource = new_words;
+        adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, mSource);
         words.setAdapter(adapter);
     }
 
@@ -64,14 +79,15 @@ public class DictionaryFragment extends Fragment {
         }
     }
 
-    public String[] getListOfWords() {
-        String[] words = new String[] {
-                "a",
-                "b",
-                "c"
-        };
-        return words;
-    }
+//    public String[] getListOfWords() {
+//        String[] words = new String[] {
+//                "a",
+//                "b",
+//                "c"
+//        };
+//        return words;
+//    }
+
 
     public void setOnFragmentListener(FragmentListener fragmentListener) {
         this.fragmentListener = fragmentListener;

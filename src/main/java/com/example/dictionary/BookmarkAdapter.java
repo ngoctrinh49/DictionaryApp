@@ -7,17 +7,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+//class bookmark
 public class BookmarkAdapter extends BaseAdapter {
     private ListItemListener listener;
     private ListItemListener listenerBtnDelete;
-
     Context mContext;
-    ArrayList<String> mSource;
+    ArrayList<String> mSource;                      //array chứa từ mới đã lưu trong bookmark
 
+    //hàm khởi tạo
     public BookmarkAdapter(Context context, String[] source) {
         this.mContext = context;
         this.mSource = new ArrayList<>(Arrays.asList(source));
@@ -39,22 +39,20 @@ public class BookmarkAdapter extends BaseAdapter {
         return 0;
     }
 
+    //pt click to word bookmark
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.bookmark_layout_item, parent, false);
-            viewHolder.textView = convertView.findViewById(R.id.tvWord);
-            viewHolder.btnDelete = convertView.findViewById(R.id.btnDelete);
-
+            viewHolder.textView = convertView.findViewById(R.id.tvWord);            //text view
+            viewHolder.btnDelete = convertView.findViewById(R.id.btnDelete);        // trast icon
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-
         viewHolder.textView.setText(mSource.get(position));
-
         //viewHolder.textView.setOnClickListener(new View.OnClickListener() {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +72,6 @@ public class BookmarkAdapter extends BaseAdapter {
                 }
             }
         });
-
         return convertView;
     }
 
@@ -95,5 +92,4 @@ public class BookmarkAdapter extends BaseAdapter {
     public void setOnItemDeleteClick(ListItemListener listItemListener) {
         this.listenerBtnDelete = listItemListener;
     }
-
 }
