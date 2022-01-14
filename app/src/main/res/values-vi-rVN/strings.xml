@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Từ điển</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="menu_home">Trang chủ</string>
+    <string name="menu_tools">Công cụ</string>
+    <string name="menu_share">Chia sẻ</string>
+    <string name="menu_send">Gửi</string>
+    <string name="bookmark">Từ đã lưu</string>
+    <string name="options">Tùy chọn</string>
+    <string name="translate">Dịch</string>
+    <string name="history">Từ đã tra</string>
+    <string name="grammar">Ngữ pháp</string>
+    <string name="text_translation">Dịch văn bản</string>
+    <string name="setting">Thiết lập</string>
+    <string name="contact_dev">Liên hệ nhà phát triển</string>
+    <string name="share">Chia sẻ</string>
+    <string name="search">Tra từ</string>
+    <string name="clear">XÓA</string>
+    <string name="nav_header_title">Từ điển Anh - Việt</string>
+    <string name="nav_header_subtitle">English - Vietnamese Dictionary</string>
+    <string name="nav_header_desc">Giới thiệu</string>
+    <string name="vietnamese_japanese">Dịch sang tiếng Nhật</string>
+    <string name="vietnamese_english">Dịch Việt - Anh</string>
+</resources>

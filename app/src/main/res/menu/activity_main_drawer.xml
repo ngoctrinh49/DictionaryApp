@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_translate"
+            android:icon="@drawable/ic_english_vietnamese"
+            android:title="@string/translate" />
+
+        <item
+            android:id="@+id/nav_translate_vi_en"
+            android:icon="@drawable/ic_vietnamese_english"
+            android:title="@string/vietnamese_english" />
+
+<!--        <item-->
+<!--            android:id="@+id/nav_translate_vi_jp"-->
+<!--            android:icon="@drawable/ic_vi_jp"-->
+<!--            android:title="@string/vietnamese_japanese" />-->
+
+        <item
+            android:id="@+id/nav_bookmark"
+            android:icon="@drawable/ic_bookmark_border"
+            android:title="@string/bookmark" />
+    </group>
+    <item android:title="@string/options">
+        <menu>
+            <item
+                android:id="@+id/nav_history"
+                android:icon="@drawable/ic_history"
+                android:title="@string/history" />
+            <item
+                android:id="@+id/nav_sentence"
+                android:icon="@drawable/ic_format_list_bulleted"
+                android:title="@string/grammar" />
+            <item
+                android:id="@+id/nav_voice"
+                android:icon="@android:drawable/stat_notify_chat"
+                android:title="@string/text_translation" />
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_settings"
+                android:title="@string/setting" />
+            <item
+                android:id="@+id/nav_email"
+                android:icon="@drawable/ic_mail_outline"
+                android:title="@string/contact_dev" />
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/share" />
+
+        </menu>
+    </item>
+
+</menu>
